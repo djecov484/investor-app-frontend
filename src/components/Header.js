@@ -5,7 +5,7 @@ function Header(props){
     return (
         <nav className="nav">
            
-                <div>Largest Companies by Market Cap</div>
+            <div id="scroll-text">Largest Companies by Market Cap</div>
            
 
         </nav>

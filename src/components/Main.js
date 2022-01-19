@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {Route, Switch} from 'react-router-dom';
 import Index from "../pages/Index";
 import Show from "../pages/Show";
+import BarChart from "./BarChart";
 
 
 function Main(props){
@@ -25,9 +26,17 @@ function Main(props){
     };
 
     useEffect(() => getRankings(), []);
-
+    
+    const loading = () => {
+        return <h1>Loading...</h1>;
+      };
     return (
         <main>
+             <div className="App-header">
+              
+               {rankings ?  <BarChart data={rankings} /> : loading()}
+
+            </div>
             <Switch>
                 <Route exact path="/rankings">
                   <Index rankings={rankings} createRankings={createRankings}/>
@@ -36,6 +45,7 @@ function Main(props){
                 render={(rp) => ( 
                 <Show {...rp}/>)}/>
             </Switch>
+           
         </main>
     )
   } 
