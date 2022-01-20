@@ -1,8 +1,9 @@
 import {useEffect, useState} from "react";
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch, Link} from 'react-router-dom';
 import Index from "../pages/Index";
 import Show from "../pages/Show";
 import BarChart from "./BarChart";
+
 
 
 function Main(props){
@@ -32,19 +33,50 @@ function Main(props){
       };
     return (
         <main>
+              <Switch>
+                <Route exact path="/rankings">
+                <Index rankings={rankings} createRankings={createRankings}/>
+                </Route>
+                <Route path="/rankings/:id" 
+                render={(rp) => ( 
+                    <Show {...rp}/>)}/>
+            </Switch>
+            
              <div className="App-header">
               
                {rankings ?  <BarChart data={rankings} /> : loading()}
 
             </div>
-            <Switch>
-                <Route exact path="/rankings">
-                  <Index rankings={rankings} createRankings={createRankings}/>
-                </Route>
-                <Route path="/rankings/:id" 
-                render={(rp) => ( 
-                <Show {...rp}/>)}/>
-            </Switch>
+          
+
+        <table className="table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Market Cap</th>
+                    <th>Country</th>
+                </tr>
+            </thead>
+            <tbody>
+                {rankings?.map((i) => { 
+                  return(
+                    <tr>
+                         <th scope="row">{i.rank}</th>
+                         <Link to="/rankings/:id"><th scope="row">{i.name}</th></Link>
+                         <th scope="row">{i.marketCap}</th>
+                         <th scope="row">{i.country}</th>
+                       
+                    </tr>
+                    
+                  )
+                })}
+                
+            </tbody>
+
+        </table>
+
+            
            
         </main>
     )

@@ -84,7 +84,7 @@ function Index(props) {
         
         <input type="submit" value="Create a Company" />
       </form>
-      {props.rankings ? loaded() : loading()}
+      {/* {props.rankings ? loaded() : loading()} */}
     </section>
   );
 }

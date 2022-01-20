@@ -43,15 +43,19 @@
 
 .body {
   color: whitesmoke;
+  margin-right: 5%;
   
 }
 
 .nav {
   background-image: url(https://www.bankrate.com/2019/03/22142110/How-to-trade-stocks.jpg?auto=webp&optimize=high&crop=16:9&width=912);
   color:lavenderblush;
-  font-size: 60px;
-
+  font-size: 70px;
+  padding: 12px;
+ 
   }
+
+ 
 
   #scroll-text {
     /* animation properties */
@@ -88,3 +92,50 @@
       transform: translateX(-100%);
     }
   } 
+
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 1rem;
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 2%;
+    margin-left: 2%;
+    
+  }
+  
+  th,
+  td {
+    border: 5px solid #ffffff;
+    text-align: left;
+    padding: 4px;
+    font-size: 32px;
+  }
+  
+  th {
+    background-color: rgba(14, 62, 91, 0.009);
+  }
+  
+  td {
+    background-color: rgb(205, 235, 253);
+  }
+  
+  form {
+    display: flex;
+    gap: 1px;
+  }
+  
+  form td:last-child {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  form * {
+    font-size: 25px;
+  }
+
+  
