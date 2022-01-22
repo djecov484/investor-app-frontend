@@ -35,7 +35,7 @@ function Main(props){
       
     //   // Function to edit  on form submission
       const updateCompany = async (company) => {
-        const response = await fetch(URL + company.id + "/", {
+        const response = await fetch(URL + company._id + "/", {
           method: "put",
           headers: {
             "Content-Type": "application/json",
@@ -48,13 +48,13 @@ function Main(props){
       };
       
       const deleteCompany = async (company) => {
-        const response = await fetch(URL + company.id + "/", {
+        const response = await fetch(URL + "/" + company._id , {
           method: "delete",
         });
-      
+      console.log("push")
     //     // get updated list 
         getRankings();
-        props.history.push("/rankings");
+        // props.history.push("/rankings");
       };
 
     useEffect(() => getRankings(), []);
@@ -64,49 +64,19 @@ function Main(props){
       };
     return (
             <main>
-                    <Index rankings={rankings} createRankings={createRankings}/>
                 <Switch>
-                    <Route exact path="/rankings" />
-                    {/* <Route path="/new" render={(routerProps) => <Main {...routerProps} initialCompany={nullCompany} handleSubmit={addRankings} buttonLabel="create company" /> } /> */}
-                    {/* <Route path="/edit" render={(routerProps) => <Main {...routerProps} initialCompany={targetCompany} handleSubmit={updateComapny} buttonLabel="update company"/> } />   */} 
+                    <Route exact path="/rankings" render={(routerProps) => <Index {...routerProps} rankings={rankings} createRankings= {createRankings}/>} />
                     
-                    <Route path="/rankings/:id" render={(routerProps) => <SingleCompany {...routerProps} rankings={rankings} edit={updateCompany} deleteCompany={deleteCompany}/> } /> 
+                    {/* <Route path="/new" render={(routerProps) => <Main {...routerProps} initialCompany={nullCompany} handleSubmit={addRankings} buttonLabel="create company" /> } /> */}
+                    {/* <Route path="/edit" render={(routerProps) => <SingleCompany {...routerProps} initialCompany={targetCompany} handleSubmit={updateComapny} buttonLabel="update company"/> } />    */}
+                    
+                    <Route path="/rankings/:id" render={(routerProps) => <SingleCompany {...routerProps} rankings={rankings} edit={updateCompany} deleteCompany={deleteCompany} match={routerProps.match}/> } /> 
                     {/* <Route path="/rankings/:id" 
                 render={(rp) => ( 
                     <SingleCompany {...rp}/>)}/> */}
                 </Switch>
 
-                <div className="App-header">
-                {rankings ?  <BarChart data={rankings} /> : loading()}
-                </div>
-            
 
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Name</th>
-                        <th>Market Cap</th>
-                        <th>Country</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {rankings?.map((i) => { 
-                    return(
-                        <tr>
-                            <th scope="row">{i.rank}</th>
-                            <Link to= {"/rankings/"+ i.id} ><th scope="row">{i.name}</th></Link>
-                            <th scope="row">{i.marketCap}</th>
-                            <th scope="row">{i.country}</th>
-                        
-                        </tr>
-                        
-                    )
-                    }  )  }
-                    
-                </tbody>
-
-            </table>
 
             </main>
         )

@@ -8,7 +8,7 @@ import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
   <Router>
   <React.StrictMode>
-  <Route path="/rankings" component={App} />
+  <App />
   </React.StrictMode>
   </Router>,
   document.getElementById('root')

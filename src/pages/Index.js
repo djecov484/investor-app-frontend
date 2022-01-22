@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {Link} from "react-router-dom"
+import BarChart from "../components/BarChart";
 
 function Index(props) {
   // state to hold formData
@@ -10,6 +11,8 @@ function Index(props) {
     country: ""
 
   });
+
+  let rankings = props.rankings
 
   // handleChange function for form
   const handleChange = (event) => {
@@ -30,20 +33,13 @@ function Index(props) {
 
   // loaded function
   const loaded = () => {
-    return props.rankings.map((company) => (
-      <div key={company._id} className="company">
-        <Link to={`/rankings/${company._id}`}><h1>{company.name}</h1></Link>
-        <img src={company.image} alt={company.name} />
-        <h3>{company.title}</h3>
+    return (
+      <>
+      <div className="App-header">
+      {rankings ?  <BarChart data={rankings} /> : loading()}
       </div>
-    ));
-  };
-
-  const loading = () => {
-    return <h1>Loading...</h1>;
-  };
-  return (
-    <section>
+  
+      <section>
       <form onSubmit={handleSubmit}>
       <input
           type="text"
@@ -84,9 +80,50 @@ function Index(props) {
         
         <input type="submit" value="Create a Company" />
       </form>
-      {/* {props.rankings ? loaded() : loading()} */}
+     
     </section>
-  );
+ 
+  <table className="table">
+      <thead>
+          <tr>
+              <th>Rank</th>
+              <th>Name</th>
+              <th>Market Cap</th>
+              <th>Country</th>
+          </tr>
+      </thead>
+      <tbody>
+          {rankings?.map((i) => { 
+          return(
+              <tr>
+                  <th scope="row">{i.rank}</th>
+                  <Link to= {"/rankings/"+ i._id} ><th scope="row">{i.name}</th></Link>
+                  <th scope="row">{i.marketCap}</th>
+                  <th scope="row">{i.country}</th>
+              
+              </tr>
+              
+          )
+          }  )  }
+          
+      </tbody>
+
+  </table>
+  </>
+    );
+  };
+
+  const loading = () => {
+    return <h1>Loading...</h1>;
+  };
+  return (
+   <>
+    
+    {rankings ? loaded():loading()}
+    </>
+  )
+   
+  
 }
 
 export default Index;
