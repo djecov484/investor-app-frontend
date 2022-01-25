@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {Route, Switch, Link} from 'react-router-dom';
+import Form from "../pages/Form";
 import Index from "../pages/Index";
 import SingleCompany from "../pages/SingleCompany";
 import BarChart from "./BarChart";
@@ -8,8 +9,9 @@ import BarChart from "./BarChart";
 
 function Main(props){
     const [rankings, setRankings] = useState(null);
+    const [company, setCompany] = useState(null)
 
-    const URL = "https://investors-app-api.herokuapp.com/rankings"; 
+    const URL = "https://investors-app-api.herokuapp.com/rankings/"; 
 
     const getRankings = async () => {
         const response = await fetch(URL);
@@ -28,13 +30,14 @@ function Main(props){
        getRankings();                 
     };
 
-    // const getTargetCompany = (company) => {
-    //     setTargetCompany(company);
-    //     props.history.push("/edit")
-    //   };
+    const getTargetCompany = (company) => {
+        setCompany(company);
+        props.history.push("/edit")
+      };
       
     //   // Function to edit  on form submission
       const updateCompany = async (company) => {
+          console.log("edit")
         const response = await fetch(URL + company._id + "/", {
           method: "put",
           headers: {
@@ -42,13 +45,13 @@ function Main(props){
           },
           body: JSON.stringify(company),
         });
-      
+       
     //     // get updated list 
         getRankings();
       };
       
       const deleteCompany = async (company) => {
-        const response = await fetch(URL + "/" + company._id , {
+        const response = await fetch(URL + company._id , {
           method: "delete",
         });
       console.log("push")
@@ -68,9 +71,9 @@ function Main(props){
                     <Route exact path="/rankings" render={(routerProps) => <Index {...routerProps} rankings={rankings} createRankings= {createRankings}/>} />
                     
                     {/* <Route path="/new" render={(routerProps) => <Main {...routerProps} initialCompany={nullCompany} handleSubmit={addRankings} buttonLabel="create company" /> } /> */}
-                    {/* <Route path="/edit" render={(routerProps) => <SingleCompany {...routerProps} initialCompany={targetCompany} handleSubmit={updateComapny} buttonLabel="update company"/> } />    */}
+                    <Route path="/edit" render={(routerProps) => <Form {...routerProps} initialCompany={company} handleSubmit={updateCompany} buttonLabel="update company"/> } />   
                     
-                    <Route path="/rankings/:id" render={(routerProps) => <SingleCompany {...routerProps} rankings={rankings} edit={updateCompany} deleteCompany={deleteCompany} match={routerProps.match}/> } /> 
+                    <Route path="/rankings/:id" render={(routerProps) => <SingleCompany {...routerProps} rankings={rankings} edit={getTargetCompany} deleteCompany={deleteCompany} match={routerProps.match}/> } /> 
                     {/* <Route path="/rankings/:id" 
                 render={(rp) => ( 
                     <SingleCompany {...rp}/>)}/> */}

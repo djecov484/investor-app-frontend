@@ -31,7 +31,8 @@ const SingleCompany = (props) => {
       <h2>{company.name}</h2>
       <h2>{company.marketCap}</h2>
       <h2>{company.country}</h2> 
-      <button onClick={(event) => props.edit(company)}>Edit</button>
+      <button> <Link to="/edit">Edit</Link> </button>
+      
       <button onClick={(event) => deleteItem()}>Delete</button>
       
    
