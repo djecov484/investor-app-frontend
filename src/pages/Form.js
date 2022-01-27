@@ -24,7 +24,7 @@ const Form = ({ initialCompany, handleSubmit, buttonLabel, history }) => {
     //pass formData to handleSubmit prop function
     handleSubmit(formData);
     //push user back to main page
-    history.push("/rankings");
+    history.push("/");
   };
 
   

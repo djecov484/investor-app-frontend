@@ -37,7 +37,7 @@ const SingleCompany = (props) => {
       
    
       
-      <Link to="/rankings">
+      <Link to="/">
         <button>Go Back</button>
       </Link>
     </div>

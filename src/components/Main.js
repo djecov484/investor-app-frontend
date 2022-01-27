@@ -68,7 +68,7 @@ function Main(props){
     return (
             <main>
                 <Switch>
-                    <Route exact path="/rankings" render={(routerProps) => <Index {...routerProps} rankings={rankings} createRankings= {createRankings}/>} />
+                    <Route exact path="/" render={(routerProps) => <Index {...routerProps} rankings={rankings} createRankings= {createRankings}/>} />
                     
                     {/* <Route path="/new" render={(routerProps) => <Main {...routerProps} initialCompany={nullCompany} handleSubmit={addRankings} buttonLabel="create company" /> } /> */}
                     <Route path="/edit" render={(routerProps) => <Form {...routerProps} initialCompany={company} handleSubmit={updateCompany} buttonLabel="update company"/> } />   
@@ -77,6 +77,7 @@ function Main(props){
                     {/* <Route path="/rankings/:id" 
                 render={(rp) => ( 
                     <SingleCompany {...rp}/>)}/> */}
+
                 </Switch>
 
 
