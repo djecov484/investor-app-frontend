@@ -23,7 +23,7 @@ const SingleCompany = (props) => {
 
  const deleteItem = ()=> {
    props.deleteCompany(company)
-   props.history.push("/rankings")
+   props.history.push("/")
  }
   return (
     <div style={div}>

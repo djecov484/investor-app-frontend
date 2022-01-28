@@ -57,7 +57,7 @@ function Main(props){
       console.log("push")
     //     // get updated list 
         getRankings();
-        props.history.push("/");
+        // props.history.push("/");
       };
 
     useEffect(() => getRankings(), []);
